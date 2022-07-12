@@ -8,10 +8,17 @@
     <TextView
         android:id="@+id/tvListView"
         android:layout_width="wrap_content"
+        android:gravity="center"
         android:layout_height="wrap_content"
         android:textColor="@android:color/black"
         android:layout_marginStart="10dp"
         android:textStyle="bold"
         tools:text="Pseudo" />
 
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/black">
+
+    </View>
 </RelativeLayout>

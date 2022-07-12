@@ -23,6 +23,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private ListView Ltlist;
     ArrayList<String> arrayList;
     ArrayAdapter<String> adapter;
+    private TextView tvListView;
 
 
     @Override
@@ -49,27 +52,47 @@ public class MainActivity extends AppCompatActivity {
 
     public void bindID() {
         fbAdd = (FloatingActionButton) findViewById(R.id.fbAdd);
+        Ltlist = (ListView) findViewById(R.id.Ltlist);
+        tvListView = (TextView) findViewById(R.id.tvListView);
+        arrayList = new ArrayList<String>();
+        adapter = new ArrayAdapter<String>(this, R.layout.raw_data_list,R.id.tvListView, arrayList);
+        Ltlist.setAdapter(adapter);
     }
 
 
     public void addItemDialog() {
-        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
-        bottomSheetDialog.setContentView(R.layout.add_item_layout);
-        EditText edEdtTask = (EditText) findViewById(R.id.edEdtTask);
-        Button btCancel = (Button) findViewById(R.id.btCancel);
-        Button btAdd = (Button) findViewById(R.id.btAdd);
-        bottomSheetDialog.show();
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
+        View view = getLayoutInflater().inflate(R.layout.add_item_layout, null);
+        bottomSheetDialog.setContentView(view);
+        EditText edEditTask = (EditText) view.findViewById(R.id.edEdtTask);
+        Button btCancel = (Button) view.findViewById(R.id.btCancel);
+        Button btAdd = (Button) view.findViewById(R.id.btAdd);
+
         btAdd.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
+                String edItem = edEditTask.getText().toString();
+                if (!edItem.isEmpty()) {
+                    arrayList.add(edItem);
+                    adapter.notifyDataSetChanged();
+                    Toast.makeText(MainActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                    //dismiss dialog once item is added successfully
+                    bottomSheetDialog.dismiss();
+                } else {
+                    Toast.makeText(getApplicationContext(), " Please Select", Toast.LENGTH_SHORT).show();
+
+                }
 
             }
         });
+
         btCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                bottomSheetDialog.cancel();
+
+
             }
         });
+        bottomSheetDialog.show();
     }
 }

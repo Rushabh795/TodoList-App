@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
 
 
@@ -13,12 +14,13 @@
         android:padding="8dp">
 
         <TextView
+            android:id="@+id/hello"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_marginTop="10dp"
             android:text="Please Enter TodoList Task"
             android:textColor="@color/black"
-            android:textSize="12dp" />
+            android:textSize="14dp" />
 
         <EditText
             android:id="@+id/edEdtTask"
@@ -26,6 +28,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:hint="Enter Task Here.."
+            android:textColor="@color/black"
+            android:textSize="12dp"
+            android:textColorHint="@color/black"
             android:padding="8dp" />
 
         <LinearLayout
